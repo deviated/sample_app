@@ -47,6 +47,27 @@ describe UsersController do
     	get 'new'
 	response.should have_tag("title", /Sign up/)
 	end
+
+    it "should have a name field" do
+    	get :new
+	response.should have_tag("input[name=?][type=?]", "user[name]", "text")
+    end
+=begin
+    it "should have an email field" do
+    	get :new
+	response.should have_tag("input[email=?][type=?]", "user[user_email]", "text")
+	end
+    
+    it "should have a password field" do
+    	get :new
+	response.should have_tag("input[password=?][type=?]", "user[password]", "text")
+	end
+
+    it "should have a password confirmation field" do
+	get :new
+	response.should have_tag("input[password_confirmation=?][type=?]", "user[password_confirmation]", "text")
+	end
+=end
   end
 
   describe "POST 'create'"do
@@ -63,7 +84,7 @@ describe UsersController do
 
 		it "should have the right title" do
 			post :create, :user => @attr
-			response.should have_tag("title", /sing up/i)
+			response.should have_tag("title", /sign up/i)
 		end
 
 		it "should render the 'new' page" do
@@ -92,4 +113,6 @@ describe UsersController do
 		end
 	    end
 	end
+
+ 
 end
