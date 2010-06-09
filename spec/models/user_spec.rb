@@ -115,7 +115,7 @@ describe User do
 
 		it "should return nil for an email address with no user" do
 			nonexistent_user = User.authenticate("bar@foo.com", @attr[:password])
-			nonexistent_ser.should be_nil
+			nonexistent_user.should be_nil
 		end
 
 		it "should return the user on email/password match" do
