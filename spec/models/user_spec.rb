@@ -32,7 +32,6 @@ describe User do
 			valid_email_user.should be_valid
 		end
 	end
-
 	it "should reject invalid email addresses" do
 		addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
 		addresses.each do |a|
@@ -93,7 +92,6 @@ describe User do
 		it "should set the encrypted password" do
 			@user.encrypted_password.should_not be_blank
 		end
-
 	describe "has_password? method" do
 	
 		it "should be true if the passwords match" do
@@ -123,5 +121,25 @@ describe User do
 			matching_user.should == @user
 		end
 	end
+
 end
-end
+	describe "remember me" do
+
+		before(:each) do
+			@user = User.create!(@attr)
+		end
+
+		it "should have a remember token" do
+			@user.should respond_to(:remember_token)
+		end
+
+		it "should have a remember_me! method" do
+			@user.should respond_to(:remember_me!)
+		end
+
+		it "should set the remember token" do
+			@user.remember_me!
+			@user.remember_token.should_not be_nil
+		end
+	end #connects to 'remember me'
+end #connects to 'User' do
