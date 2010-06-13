@@ -224,6 +224,16 @@ describe UsersController do
 				put :update, :id => @user, :user => {}
 				response.should redirect_to(root_path)
 			end
+
+			it "should paginate users" do
+				30.times { Factory(:user, :email => Factory.next(:email)) }
+				get :index
+				response.should have_tag("div.paginaion")
+				response.should have_tag("span", "&laquo; Previous")
+				response.should have_tag("span", "1")
+				response.should have_tag("a[href=?]", "/users?page=2", "2")
+				response.should have_tag("a[href=?]", "/users?page=2", "Next &raquo;")
+			end
 		end
 	end
 
