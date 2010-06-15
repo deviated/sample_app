@@ -36,7 +36,9 @@ class User < ActiveRecord::Base
 		return user if user.has_password?(submitted_password)
 	end
 
-
+	def feed
+		Micropost.all(:conditions => ["user_id = ?", id])
+	end
 
 	private
 		
